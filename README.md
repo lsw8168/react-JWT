@@ -17,25 +17,25 @@
  * 사용 시 주의사항: Traffic에 영향을 미치므로 짧아야 좋고, TLS는 사실상 필수이다. 사용자 본인 대상으로도 보안이 필요하면 `JWE`를 사용하면 되고, OAuth를 따라 `Resource Server`, `Authentication Server`로 나뉘는 경우 서명(`JWS`) 방식을 `RSA256` 등의 비대칭키로 가져가는 것이 좋다.
 
 ## JWT Lifectcle
-- JWT는 만료시간이 있고, Refresh 과정이 있기 때문에 그 Lifecycle이 조금 복잡하다.
-- 크게 접속 시 검증과 요청 전 검증으로 나뉘고, 공통적으로 Refresh 과정을 거치게 된다.
-- 접속 시 검증 시나리오
+* JWT는 만료시간이 있고, Refresh 과정이 있기 때문에 그 Lifecycle이 조금 복잡하다.
+* 크게 접속 시 검증과 요청 전 검증으로 나뉘고, 공통적으로 Refresh 과정을 거치게 된다.
+* 접속 시 검증 시나리오
   - 사용자가 접속한다.
-    - 기존에 토큰이 있는 경우
-      - Access Token의 만료기간을 확인한다.
+    + 기존에 토큰이 있는 경우
+      1. Access Token의 만료기간을 확인한다.
         - 만료되지 않은 경우, END
         - 만료된 경우, REFRESH
-      - 기존에 토큰이 없는 경우
+      2. 기존에 토큰이 없는 경우
         - LOGIN
         - 로그인 성공 시 Access Token과 Refresh Token을 서버로부터 받고 사용한다.
-- 요청 전 검증 시나리오
+* 요청 전 검증 시나리오
   - API 요청을 날리게 될 때 Access Token을 사용하게 된다.
   - 요청 전, Access Token의 만료 여부를 확인한다.
-    - Access Token이 만료되지 않은 경우
-      - 만료되지 않은 경우, END
-      - 만료된 경우, REFRESH
-    - 정상적인 Access Token으로 API 요청을 수행한다.
-- Refresh 과정
+    + Access Token이 만료되지 않은 경우
+      1. 만료되지 않은 경우, END
+      2. 만료된 경우, REFRESH
+    + 정상적인 Access Token으로 API 요청을 수행한다.
+* Refresh 과정
   - Refresh Token으로 Access Token을 재발행 요청한다.
-    - Refresh Token이 만료된 경우, LOGOUT
-    - 만료되지 않은 경우, 정상 Access Token을 저장한다. END
+    + Refresh Token이 만료된 경우, LOGOUT
+    + 만료되지 않은 경우, 정상 Access Token을 저장한다. END
