@@ -28,3 +28,14 @@
       - 기존에 토큰이 없는 경우
         - LOGIN
         - 로그인 성공 시 Access Token과 Refresh Token을 서버로부터 받고 사용한다.
+- 요청 전 검증 시나리오
+  - API 요청을 날리게 될 때 Access Token을 사용하게 된다.
+  - 요청 전, Access Token의 만료 여부를 확인한다.
+    - Access Token이 만료되지 않은 경우
+      - 만료되지 않은 경우, END
+      - 만료된 경우, REFRESH
+    - 정상적인 Access Token으로 API 요청을 수행한다.
+- Refresh 과정
+  - Refresh Token으로 Access Token을 재발행 요청한다.
+    - Refresh Token이 만료된 경우, LOGOUT
+    - 만료되지 않은 경우, 정상 Access Token을 저장한다. END
