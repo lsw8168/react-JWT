@@ -23,11 +23,11 @@
   - 사용자가 접속한다.
     + 기존에 토큰이 있는 경우
       1. Access Token의 만료기간을 확인한다.
-        - 만료되지 않은 경우, END
-        - 만료된 경우, REFRESH
+        1. 만료되지 않은 경우, END
+        2. 만료된 경우, REFRESH
       2. 기존에 토큰이 없는 경우
-        - LOGIN
-        - 로그인 성공 시 Access Token과 Refresh Token을 서버로부터 받고 사용한다.
+        1. LOGIN
+        2. 로그인 성공 시 Access Token과 Refresh Token을 서버로부터 받고 사용한다.
 * 요청 전 검증 시나리오
   - API 요청을 날리게 될 때 Access Token을 사용하게 된다.
   - 요청 전, Access Token의 만료 여부를 확인한다.
